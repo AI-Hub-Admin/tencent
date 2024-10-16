@@ -8,8 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 install_requires = [
     'FinanceAgent>=0.0.2',
-    'requests>=2.17.0',
-    'urllib>=4.5.0',
+    'requests>=2.17.0'
 ]
 
 extras = dict()
