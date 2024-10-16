@@ -13,3 +13,6 @@ API_NAME_DEMO = "api_demo"
 API_NAME_STOCK = "stock_price"
 API_NAME_DIALOGUE_CHALLENGE = "dialogue_challenge"
 
+START_SCREEN_CONTRIBE_GITHUB = "https://github.com/AI-Hub-Admin/tencent"
+START_SCREEN_CONTRIBE_FORUM = "http://www.deepnlp.org/blog?category=tencent"
+
