@@ -2,10 +2,10 @@
 
 *** IMPORTANT LEGAL DISCLAIMER ***
 
-"tencent" python package is not affiliated, endorsed, or vetted by Tencent Corporation. It's an open-source pakcage and crowd contributed API Wrapper of public available tencent products and services to help devlopers deploy and use these product or services easier. This package name is originally intended to serve as "ten cent(s)" or "one dime", quoted from one ex-Tencent-er.
+"tencent" python package is not affiliated, endorsed, or vetted by Tencent Corporation. It's an open-source pakcage and crowd contributed API Wrapper of public available tencent products and services to help developers deploy and use these product or services easier. This package name is originally intended to serve as "ten cent(s)" or "one dime", quoted from one ex-Tencent-er.
 
 
-Contributing API Wrapper to tencent pypi package, Visit Github https://github.com/AI-Hub-Admin/tencent and follow the guidelines on forum http://www.deepnlp.org/blog?category=tencent
+Contributing API Wrapper to tencent pypi package, Visit Github [tencent package Github repo](https://github.com/AI-Hub-Admin/tencent) and follow the guidelines on forum [Tencent Pypi Developing Forum deepnlp.org](http://www.deepnlp.org/blog?category=tencent).
 
 
 ## Public Available API Wrappers
@@ -35,7 +35,7 @@ import tencent
 tencent.greeting()
 
 ```
-![Alt text](https://github.com/AI-Hub-Admin/tencent/blob/main/src/tencent/data/greeting/greeting_ponyma.jpg)
+![tencent python package pony ma greeting preview](https://github.com/AI-Hub-Admin/tencent/blob/main/src/tencent/data/greeting/greeting_ponyma.jpg?raw=true)
 
 
 * note: if you want to display the greeting, just set variable START_SCREEN_ENABLE in constants.py to False
@@ -51,8 +51,10 @@ stock_dict = tencent.api("stock_price")
 keys=["symbol", "avg_price", "high", "low", "change", "update_time", "market_capitalization", "source"]
 print ("#### Tencent Stock Price #### ")
 for key in keys:
-	print (key + "|" + stock_dict[key])
-
+    if key in stock_dict:
+        print (key + "|" + stock_dict[key])
+    else:
+    	print (key + "|" + "")
 ```
 
 Output
