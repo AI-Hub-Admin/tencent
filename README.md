@@ -25,8 +25,6 @@ pip install tencent
 ```
 
 
-
-
 ## Usage
 
 ### Package Import Greeting
@@ -36,7 +34,7 @@ import tencent
 tencent.greeting()
 
 ```
-![tencent python package pony ma greeting preview](https://github.com/AI-Hub-Admin/tencent/blob/main/src/tencent/data/greeting/greeting_ponyma.jpg?raw=true)
+![tencent python package pony ma greeting preview](https://github.com/AI-Hub-Admin/tencent/blob/main/docs/greeting_ponyma.jpg?raw=true)
 
 
 * note: if you want to display the greeting, just set variable START_SCREEN_ENABLE in constants.py to False
@@ -74,58 +72,20 @@ Output
 
 ### Wechat Public Account Backend Automatic Reply 
 
-微信公众号后台一键验证和服务部署，依赖Flask的python框架
+微信公众号后台，python服务自动回复(文本/图像/语音)，一键验证和服务部署，依赖Flask的python框架
 
 see /examples/wechat/main.py
 
 
-
 ```
-from flask import Flask, jsonify, send_from_directory
-from flask import request
-
-import traceback
-from tencent.contrib.wechat.wechat_api import *
-from tencent.contrib.wechat import receive
-
-app = Flask(__name__, static_folder="static")
-app.config["JSON_AS_ASCII"] = False
-
-
-@app.route('/wx', methods=['GET', 'POST'])
-def main_api():
-    """
-        Utils for Wechat backend verification, Note Wechat set: GET request, not post request
-    """
-    try:
-        if request.method == "GET":
-            return WechatServerVeriAPI.static_api(args=[request], kwargs={})
-        elif request.method == 'POST':
-            raw_data = request.data
-            recMsg = receive.parse_xml(raw_data)
-            if isinstance(recMsg, receive.Msg):
-                if recMsg.MsgType == 'text':
-                    return WechatTextReplyBaseAPI.static_api(args=[recMsg], kwargs={})
-                elif recMsg.MsgType == 'image':
-                    return WechatImageReplyBaseAPI.static_api(args=[recMsg], kwargs={})
-                else:
-                    return "success"
-            else:
-                return "success"
-        else:
-            print ("DEBUG: Request Method not supported %s" % request.method)
-            return "fail"
-    except Exception as e:
-        print (e)
-        s = traceback.format_exc()
-        print (s)            
-        return "fail"
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=80,debug=True)
-
-
+    # start flask server backend
+    python ./examples/wechat/main.py
 ```
+
+
+执行效果
+
+![tencent wechat backend](https://github.com/AI-Hub-Admin/tencent/blob/main/docs/wechat_account_autoreply.png?raw=true)
 
 
 
@@ -176,6 +136,17 @@ call_openai_api_tools()
 
 ```
 
+
+
+
+##### Blogs
+[Tencent Python Package Contributing General Guidelines](http://www.deepnlp.org/blog/tencent-python-package-contributing-general-guidelines)
+[Introduction to multimodal generative models](http://www.deepnlp.org/blog/introduction-to-multimodal-generative-models) <br>
+[Generative AI Search Engine Optimization](http://www.deepnlp.org/blog/generative-ai-search-engine-optimization-how-to-improve-your-content) <br>
+[AI Image Generator User Reviews](http://www.deepnlp.org/store/image-generator) <br>
+[AI Video Generator User Reviews](http://www.deepnlp.org/store/video-generator) <br>
+[AI Chatbot & Assistant Reviews](http://www.deepnlp.org/store/chatbot-assistant) <br>
+[Best AI Tools User Reviews](http://www.deepnlp.org/store/pub/) <br>
 
 
 ## Related
@@ -236,12 +207,3 @@ call_openai_api_tools()
 [BMW i4](http://www.deepnlp.org/store/pub/pub-bmw-i4) <br>
 [Baidu Apollo Reviews](http://www.deepnlp.org/store/pub/pub-baidu-apollo) <br>
 [Hyundai IONIQ 6](http://www.deepnlp.org/store/pub/pub-hyundai-ioniq-6) <br>
-
-
-##### Blogs
-[Introduction to multimodal generative models](http://www.deepnlp.org/blog/introduction-to-multimodal-generative-models) <br>
-[Generative AI Search Engine Optimization](http://www.deepnlp.org/blog/generative-ai-search-engine-optimization-how-to-improve-your-content) <br>
-[AI Image Generator User Reviews](http://www.deepnlp.org/store/image-generator) <br>
-[AI Video Generator User Reviews](http://www.deepnlp.org/store/video-generator) <br>
-[AI Chatbot & Assistant Reviews](http://www.deepnlp.org/store/chatbot-assistant) <br>
-[Best AI Tools User Reviews](http://www.deepnlp.org/store/pub/) <br>
