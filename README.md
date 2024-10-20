@@ -14,8 +14,9 @@ Contributing API Wrapper to tencent pypi package, Visit Github [tencent package 
 |  -------- | --------  | --------  |
 |  greeting  |  Greeting when import package |   Prod |
 |  stock_price  |  Fetch Tencent Stock Price (HKEX: 700) Realtime Quote |   Prod     |
-|  TBD  |  Wechat Public Account Backend Automatic Reply  |   Dev  |
-
+|  WechatServerVeriAPI  |  Wechat Server Verification 微信公众号订阅号服务器验证  |   Prod  |
+|  WechatTextReplyBaseAPI  |  Wechat Message Text Reply 处理微信用户文本输入API的基类  |   Prod  |
+|  WechatImageReplyBaseAPI  | Wechat Message Image Reply   处理微信用户图像输入基类API 基类 |   Prod  |
 
 
 ## Install
@@ -72,13 +73,108 @@ Output
 
 
 ### Wechat Public Account Backend Automatic Reply 
-TBD
+
+微信公众号后台一键验证和服务部署，依赖Flask的python框架
+
+see /examples/wechat/main.py
 
 
 
+```
+from flask import Flask, jsonify, send_from_directory
+from flask import request
+
+import traceback
+from tencent.contrib.wechat.wechat_api import *
+from tencent.contrib.wechat import receive
+
+app = Flask(__name__, static_folder="static")
+app.config["JSON_AS_ASCII"] = False
+
+
+@app.route('/wx', methods=['GET', 'POST'])
+def main_api():
+    """
+        Utils for Wechat backend verification, Note Wechat set: GET request, not post request
+    """
+    try:
+        if request.method == "GET":
+            return WechatServerVeriAPI.static_api(args=[request], kwargs={})
+        elif request.method == 'POST':
+            raw_data = request.data
+            recMsg = receive.parse_xml(raw_data)
+            if isinstance(recMsg, receive.Msg):
+                if recMsg.MsgType == 'text':
+                    return WechatTextReplyBaseAPI.static_api(args=[recMsg], kwargs={})
+                elif recMsg.MsgType == 'image':
+                    return WechatImageReplyBaseAPI.static_api(args=[recMsg], kwargs={})
+                else:
+                    return "success"
+            else:
+                return "success"
+        else:
+            print ("DEBUG: Request Method not supported %s" % request.method)
+            return "fail"
+    except Exception as e:
+        print (e)
+        s = traceback.format_exc()
+        print (s)            
+        return "fail"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0',port=80,debug=True)
+
+
+```
 
 
 
+### Open AI Completions APIs and pass Tencent APIs as function Schema
+
+see /tests/test_agent_api_tools.py for more details
+
+```
+
+
+import json
+import tencent
+from tencent.utils.agent_utils import function_to_schema
+
+def tencent_api_base(arg1, arg2, arg3, arg4="value4", arg5 = "value5"):
+    result = tencent.api("api_base", arg1, arg2, arg3, arg4=arg4, arg5 = arg5)
+    print ("DEBUG: tencent_api_base result %s" % str(result))
+    return result
+
+def prepare_agent_api_schema():
+    tools = [tencent_api_base]
+
+    tool_schemas = [function_to_schema(tool) for tool in tools]
+    print ("DEBUG: Agent API Schema")
+    [print(json.dumps(schema, indent=2)) for schema in tool_schemas]
+    
+    return tool_schemas
+
+prepare_agent_api_schema()
+
+
+def call_openai_api_tools():
+    """
+        swarm, need openai keys
+    """
+    tool_schemas = prepare_agent_api_schema()
+
+    response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": "Calling Tencent Service and Return Results"}],
+                tools=tool_schemas,
+            )
+    message = response.choices[0].message
+    message.tool_calls[0].function
+
+
+call_openai_api_tools()
+
+```
 
 
 
