@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-#
+
+WECHAT_RESPONSE_FAIL = "fail"
+WECHAT_RESPONSE_SUCCESS = "success"
+APP_DEPLOY_PORTAL = 80
+WECHAT_BACKEND_TOKEN = "dummy"
+MSG_AUTO_REPLY_TEXT = "hello"
