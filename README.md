@@ -150,6 +150,28 @@ call_openai_api_tools()
 
 
 ## Related
+#### AI Agent Marketplace and Search
+[AI Agent Marketplace and Search](http://www.deepnlp.org/search/agent) <br>
+[Robot Search](http://www.deepnlp.org/search/robot) <br>
+[Equation and Academic search](http://www.deepnlp.org/search/equation) <br>
+[AI & Robot Comprehensive Search](http://www.deepnlp.org/search) <br>
+[AI & Robot Question](http://www.deepnlp.org/question) <br>
+[AI & Robot Community](http://www.deepnlp.org/community) <br>
+[AI Agent Marketplace Blog](http://www.deepnlp.org/blog/ai-agent-marketplace-and-search-portal-reviews-2025) <br>
+##### AI Agent
+[AI Agent Reviews](http://www.deepnlp.org/store/ai-agent) <br>
+[AI Agent Publisher](http://www.deepnlp.org/store/pub?category=ai-agent) <br>
+[Microsoft AI Agents Reviews](http://www.deepnlp.org/store/pub/pub-microsoft-ai-agent) <br>
+[Claude AI Agents Reviews](http://www.deepnlp.org/store/pub/pub-claude-ai-agent) <br>
+[OpenAI AI Agents Reviews](http://www.deepnlp.org/store/pub/pub-openai-ai-agent) <br>
+[AgentGPT AI Agents Reviews](http://www.deepnlp.org/store/pub/pub-agentgpt) <br>
+[Saleforce AI Agents Reviews](http://www.deepnlp.org/store/pub/pub-salesforce-ai-agent) <br>
+[AI Agent Builder Reviews](http://www.deepnlp.org/store/ai-agent/ai-agent-builder) <br>
+##### Reasoning
+[OpenAI o1 Reviews](http://www.deepnlp.org/store/pub/pub-openai-o1) <br>
+[OpenAI o3 Reviews](http://www.deepnlp.org/store/pub/pub-openai-o3) <br>
+
+
 ### AI Services Reviews and Ratings <br>
 [AI & Robotics User Reviews](http://www.deepnlp.org/store/) <br>
 [AI & Robotics Best AI Tools List](http://www.deepnlp.org/store/pub/) <br>
